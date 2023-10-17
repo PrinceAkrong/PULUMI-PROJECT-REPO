@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: projectapp1-nginx-deployment
+  labels:
+    app: projectapp1-nginx
+spec:
+  replicas: 3 # Change the replica count to 3
+  selector:
+    matchLabels:
+      app: projectapp1-nginx
+  template:
+    metadata:
+      labels:
+        app: projectapp1-nginx
+    spec:
+      containers:
+        - name: projectapp1-nginx
+          image: cstnacr1.azurecr.io/projectapp1nginx # image id will change
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: "500m"  # Define CPU limit as 0.5 core
+              memory: "512Mi" # Define memory limit as 512 MiB
+            requests:
+              cpu: "250m"  # Define CPU request as 0.25 core
+              memory: "256Mi" # Define memory request as 256 MiB
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: projectapp1-nginx-loadbalancer-service
+  labels:
+    app: projectapp1-nginx
+spec:
+  type: LoadBalancer
+  selector:
+    app: projectapp1-nginx
+  ports:
+    - port: 80
+      targetPort: 80
+
+
+
