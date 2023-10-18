@@ -19,7 +19,7 @@ jobs:
       - name: Kubectl tool installer
         uses: Azure/setup-kubectl@v3
         with:
-          version:  default is latest
+          version:  'v1.28.2'
         id: Install  
          
       - uses: actions/setup-node@v3
