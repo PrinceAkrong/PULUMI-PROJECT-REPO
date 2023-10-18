@@ -50,8 +50,9 @@ jobs:
         run: aws eks update-kubeconfig --name eks-cluster-eksCluster-7a738a8    # This references the EKS Cluster name
 
       - name: Deploy to EKS
+       
         run:
-             kubectl apply -f DevOps\kube-manifests\Deployment-and-LoadBalancer-Service.yml
+             kubectl apply -f DevOps/kube-manifest/Deployment-and-LoadBalancer-Service.yml
              
 
   
