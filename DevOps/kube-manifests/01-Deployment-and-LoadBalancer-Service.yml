@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: projectapp1-nginx
-          image: cstnacr1.azurecr.io/projectapp1nginx # image id will change
+          image: 880386963573.dkr.ecr.us-east-1.amazonaws.com/projec-image:9b6bf218f6cb7ebc4ed26c02b9273b8653c2731e
           ports:
             - containerPort: 80
           resources:
@@ -39,7 +39,7 @@ spec:
     app: projectapp1-nginx
   ports:
     - port: 80
-      targetPort: 80
+      targetPort: 8080
 
 
 
