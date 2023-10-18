@@ -34,6 +34,14 @@ const eksCluster = new eks.Cluster("eks-cluster", {
     // Uncomment the next two lines for a private cluster (VPN access required)
     // endpointPrivateAccess: true,
     // endpointPublicAccess: false
+
+    // Specify the desired Kubernetes version (use "1.21" for the latest version, or specify the version you need)
+    enabledClusterLogTypes: ["api", "audit", "authenticator", "controllerManager", "scheduler"],
+    tags: {
+        "Environment": "development",
+    },
+    deployDashboard: true,
+    version: "1.28", // Set the desired Kubernetes version
 });
 
 // Export some values for use elsewhere
