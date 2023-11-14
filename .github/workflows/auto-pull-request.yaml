@@ -1,30 +1,22 @@
-name: Auto Pull Request
+name: Automatically create / update pull request
 
+# run this workflow only on new feature branches, not when they're merged to main
 on:
   push:
-    branches:
-      - Feature-branch
+    branches-ignore:
+      - "main"
 
 jobs:
-  create_pull_request:
+  create_pr_repo_sync:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Extract Git Commit Data
-      uses: rlespinasse/git-commit-data-action@v1.x
-
-    - name: Update Author Information
-      run: |
-        echo "Author: ${{ env.GIT_COMMIT_AUTHOR_NAME }}" > AUTHOR
-
-    - name: Create Pull Request
-      uses: peter-evans/create-pull-request@v3
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        branch: main
-        commit-message: 'Automated pull request'
-        title: 'Automated pull request'
-        body: 'This pull request was automatically generated.'
+      - uses: actions/checkout@v3
+      - name: Create pull request
+        id: open-pr
+        uses: repo-sync/pull-request@v2
+        with:
+          destination_branch: "main"
+          pr_title: "feat: PLACEHOLDER TITLE"
+          pr_template: ".github/PULL_REQUEST_TEMPLATE.md"
+          pr_reviewer: "paigen11"
+          pr_draft: true
