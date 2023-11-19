@@ -3,7 +3,7 @@ name: Auto Pull Request
 on:
   push:
     branches:
-      - auto-pr-branch  # Replace with the branch you want to trigger the action on
+      - auto-pr-branch
 
 jobs:
   create_pull_request:
@@ -17,8 +17,7 @@ jobs:
         uses: peter-evans/create-pull-request@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          branch: auto-pr-branch  # Replace with the branch name where changes trigger the action
+          branch: main  # Replace 'main' with your target branch name
           commit-message: 'Automated pull request'
           title: 'Automatic Pull Request'
           body: 'This is an automated pull request.'
-
